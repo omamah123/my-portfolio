@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Omamah Ajmal</title>
+<title>Omamah Ajmal — CS · AI/ML · Full-Stack</title>
+<meta name="description" content="Omamah Ajmal — CS student at PIEAS building intelligent systems across NLP, computer vision, and full-stack engineering.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
@@ -36,32 +37,84 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 1.1rem 5vw;
     display: flex; align-items: center; justify-content: space-between;
-    background: rgba(17,17,16,0.9);
-    backdrop-filter: blur(12px);
+    background: rgba(17,17,16,0.88);
+    backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border);
   }
-  .nav-logo {
-    font-weight: 600; font-size: 0.95rem; color: var(--text);
-    letter-spacing: -0.01em;
-  }
+  .nav-logo { font-weight: 600; font-size: 0.95rem; color: var(--text); letter-spacing: -0.01em; }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    font-size: 0.82rem; color: var(--muted); text-decoration: none;
-    transition: color 0.15s;
-  }
+  .nav-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.15s; }
   .nav-links a:hover { color: var(--text); }
-
   .hamburger { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 4px; }
   .hamburger span { display: block; width: 20px; height: 1.5px; background: var(--muted); }
 
-  /* LAYOUT */
-  .container { max-width: 720px; margin: 0 auto; padding: 0 5vw; }
-
-  /* HERO */
+  /* ── ANIMATED HERO BG ── */
   #hero {
-    padding: 9rem 5vw 5rem;
+    position: relative;
+    padding: 9rem 5vw 5.5rem;
     max-width: 720px; margin: 0 auto;
+    overflow: hidden;
   }
+
+  /* Animated mesh blobs */
+  .hero-bg {
+    position: absolute;
+    inset: -80px -80px -80px -80px;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.13;
+    animation: drift linear infinite;
+  }
+  .blob-1 {
+    width: 380px; height: 380px;
+    background: radial-gradient(circle, #6b9fff 0%, transparent 70%);
+    top: -60px; left: -80px;
+    animation-duration: 18s;
+    animation-delay: 0s;
+  }
+  .blob-2 {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, #a78bfa 0%, transparent 70%);
+    top: 40px; right: -40px;
+    animation-duration: 22s;
+    animation-delay: -6s;
+  }
+  .blob-3 {
+    width: 260px; height: 260px;
+    background: radial-gradient(circle, #38bdf8 0%, transparent 70%);
+    bottom: -30px; left: 30%;
+    animation-duration: 26s;
+    animation-delay: -12s;
+  }
+
+  @keyframes drift {
+    0%   { transform: translate(0,    0)    scale(1);    }
+    25%  { transform: translate(30px, -20px) scale(1.06); }
+    50%  { transform: translate(15px,  35px) scale(0.95); }
+    75%  { transform: translate(-20px, 18px) scale(1.04); }
+    100% { transform: translate(0,    0)    scale(1);    }
+  }
+
+  /* Noise grain overlay */
+  #hero::before {
+    content: '';
+    position: absolute;
+    inset: 0; z-index: 1;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+    opacity: 0.022;
+  }
+
+  /* Keep hero content above bg */
+  #hero > *:not(.hero-bg) { position: relative; z-index: 2; }
+
   .hero-tag {
     display: inline-block;
     font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em;
@@ -81,6 +134,18 @@
     margin-bottom: 2.2rem;
   }
   .hero-desc strong { color: var(--text); font-weight: 500; }
+  .hero-contact {
+    display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+    margin-bottom: 1.6rem;
+  }
+  .hero-contact-item {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.82rem; color: var(--muted); text-decoration: none;
+    transition: color 0.15s;
+  }
+  .hero-contact-item:hover { color: var(--accent); }
+  .hero-contact-item svg { opacity: 0.6; flex-shrink: 0; }
+  .hero-contact-sep { color: var(--muted2); font-size: 0.75rem; }
   .hero-ctas { display: flex; gap: 0.65rem; flex-wrap: wrap; }
 
   .btn {
@@ -117,7 +182,6 @@
     gap: 1.2rem;
     padding-top: 2rem; border-top: 1px solid var(--border);
   }
-  .meta-item {}
   .meta-label {
     font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em;
     text-transform: uppercase; color: var(--muted2);
@@ -128,7 +192,6 @@
   .meta-val a:hover { text-decoration: underline; }
 
   /* SKILLS */
-  #skills { background: var(--bg); }
   .skill-row {
     display: flex; align-items: baseline; gap: 1.5rem;
     padding: 1.1rem 0; border-bottom: 1px solid var(--border);
@@ -137,16 +200,14 @@
   .sk-label {
     font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em;
     text-transform: uppercase; color: var(--muted2);
-    width: 90px; flex-shrink: 0;
+    width: 100px; flex-shrink: 0;
   }
-  .sk-list {
-    font-size: 0.88rem; color: var(--muted); line-height: 1.7;
-  }
+  .sk-list { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
 
   /* PROJECTS */
   #projects { background: var(--bg2); max-width: 100%; padding: 5rem 5vw; }
   #projects .inner { max-width: 720px; margin: 0 auto; }
-  .proj-list { display: flex; flex-direction: column; gap: 0; }
+  .proj-list { display: flex; flex-direction: column; }
   .proj-row {
     display: grid; grid-template-columns: 32px 1fr;
     gap: 1.5rem; padding: 2rem 0;
@@ -170,6 +231,20 @@
     background: var(--border); color: var(--muted);
   }
 
+  /* EDUCATION */
+  .edu-row {
+    padding: 1.5rem 0; border-bottom: 1px solid var(--border);
+  }
+  .edu-row:first-child { border-top: 1px solid var(--border); }
+  .edu-school { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 0.2rem; }
+  .edu-degree { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.4rem; }
+  .edu-meta { font-size: 0.75rem; color: var(--muted2); font-weight: 500; letter-spacing: 0.04em; }
+  .edu-courses {
+    margin-top: 0.7rem;
+    font-size: 0.8rem; color: var(--muted2); line-height: 1.65;
+  }
+  .edu-courses span { color: var(--muted); }
+
   /* CERTS */
   .cert-list { display: flex; flex-direction: column; }
   .cert-row {
@@ -180,11 +255,11 @@
   .cert-row:first-child { border-top: 1px solid var(--border); }
   .cert-name { font-size: 0.9rem; color: var(--text); font-weight: 400; }
   .cert-org { font-size: 0.75rem; color: var(--muted2); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+  .cert-year { font-size: 0.72rem; color: var(--muted2); }
 
   /* CONTACT */
   #contact { background: #0d0d0c; max-width: 100%; padding: 5rem 5vw; }
   #contact .inner { max-width: 720px; margin: 0 auto; }
-  #contact .section-label { color: var(--muted2); }
   .contact-big {
     font-size: clamp(2.2rem, 5vw, 3.5rem);
     font-weight: 600; letter-spacing: -0.03em;
@@ -237,9 +312,9 @@
 <nav id="nb">
   <div class="nav-logo">Omamah Ajmal</div>
   <ul class="nav-links" id="nl">
-    <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
     <li><a href="#certifications">Certs</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -250,42 +325,31 @@
 
 <!-- HERO -->
 <div id="hero">
+  <div class="hero-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
   <p class="hero-tag">CS &middot; AI / ML &middot; Full-Stack</p>
   <h1 class="hero-name">Omamah Ajmal</h1>
-  <p class="hero-desc">Building intelligent systems at the intersection of <strong>computer vision, NLP</strong>, and <strong>full-stack engineering</strong>.</p>
+  <p class="hero-desc">Third-year CS student at <strong>PIEAS</strong> building intelligent systems across <strong>computer vision, NLP</strong>, and <strong>generative AI</strong> — from fine-tuned transformers to real-time detection pipelines.</p>
+  <div class="hero-contact">
+    <a href="mailto:omamah.ajmal@gmail.com" class="hero-contact-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      omamah.ajmal@gmail.com
+    </a>
+    <span class="hero-contact-sep">·</span>
+    <a href="tel:+923313239174" class="hero-contact-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      +92-331-3239174
+    </a>
+  </div>
   <div class="hero-ctas">
     <a href="#projects" class="btn btn-solid">View Projects</a>
     <a href="#contact" class="btn btn-ghost">Get in Touch</a>
   </div>
 </div>
-
-<hr class="divider">
-
-<!-- ABOUT -->
-<section id="about">
-  <p class="section-label reveal">About</p>
-  <p class="about-text reveal rd1">
-    I'm a Computer Science student focused on applied AI. My work sits where <strong>research meets engineering</strong> — whether that's fine-tuning a YOLOv8 model for real-time monitoring, building an NLP pipeline that converts scripts to video, or deploying a production web app end-to-end. I care about writing code that actually works in the real world.
-  </p>
-  <div class="about-meta reveal rd2">
-    <div class="meta-item">
-      <p class="meta-label">Degree</p>
-      <p class="meta-val">BS Computer Science</p>
-    </div>
-    <div class="meta-item">
-      <p class="meta-label">Email</p>
-      <p class="meta-val"><a href="mailto:omamah.ajmal@gmail.com">omamah.ajmal@gmail.com</a></p>
-    </div>
-    <div class="meta-item">
-      <p class="meta-label">LinkedIn</p>
-      <p class="meta-val"><a href="https://linkedin.com/in/omamahaj" target="_blank">omamahaj</a></p>
-    </div>
-    <div class="meta-item">
-      <p class="meta-label">GitHub</p>
-      <p class="meta-val"><a href="https://github.com/omamah123" target="_blank">omamah123</a></p>
-    </div>
-  </div>
-</section>
 
 <hr class="divider">
 
@@ -298,13 +362,18 @@
       <span class="sk-list">Python, Java, C++, C, R, JavaScript, SQL</span>
     </div>
     <div class="skill-row">
-      <span class="sk-label">AI / ML</span>
-      <span class="sk-list">Machine Learning, NLP, Computer Vision, YOLOv8, Scikit-learn, Pandas</span>
+      <span class="sk-label">ML Frameworks</span>
+      <span class="sk-list">PyTorch, Scikit-learn, Stable Diffusion, HuggingFace Transformers, Stable-Baselines3, hmmlearn</span>
     </div>
     <div class="skill-row">
-      <span class="sk-label">Web & Tools</span>
-      <span class="sk-list">ASP.NET, HTML/CSS, SQL Server, Git, GitHub</span>
+      <span class="sk-label">Computer Vision</span>
+      <span class="sk-list">YOLOv8, OpenCV</span>
     </div>
+    <div class="skill-row">
+      <span class="sk-label">NLP</span>
+      <span class="sk-list">XLM-RoBERTa, NLTK, Transformers</span>
+    </div>
+
   </div>
 </section>
 
@@ -316,63 +385,71 @@
     <p class="section-label reveal">Projects</p>
     <div class="proj-list">
 
-      <a href="https://github.com/omamah123" target="_blank" class="proj-row reveal">
+      <a href="https://github.com/omamah123/urdu-hate-speech-detection" target="_blank" class="proj-row reveal">
         <span class="proj-idx">01</span>
         <div>
-          <h3 class="proj-name">Lab Monitoring System</h3>
-          <p class="proj-desc">Real-time object detection and activity tracking using YOLOv8 — enabling intelligent surveillance and behavioral analysis in lab environments.</p>
-          <div class="proj-chips"><span class="chip">YOLOv8</span><span class="chip">Computer Vision</span><span class="chip">Python</span></div>
+          <h3 class="proj-name">Urdu Hate Speech Detection</h3>
+          <p class="proj-desc">Benchmarked 9 classifiers (LR, SVM, RF, Naïve Bayes, RNN, LSTM, XLM-RoBERTa) on 16,341 Nastaliq Urdu YouTube comments for 3-class hate speech detection. XLM-RoBERTa achieved 72.1% weighted F1 — a reproducibility finding documenting the gap vs. the paper's proprietary training set.</p>
+          <div class="proj-chips"><span class="chip">XLM-RoBERTa</span><span class="chip">NLP</span><span class="chip">PyTorch</span><span class="chip">Scikit-learn</span></div>
         </div>
       </a>
 
-      <a href="https://github.com/omamah123" target="_blank" class="proj-row reveal rd1">
+      <a href="https://github.com/omamah123/ai-personalized-diet-and-fitness" target="_blank" class="proj-row reveal rd1">
         <span class="proj-idx">02</span>
         <div>
-          <h3 class="proj-name">Script-to-Video Pipeline</h3>
-          <p class="proj-desc">AI/NLP pipeline that transforms raw text scripts into structured video content — automating narration segmentation, asset pairing, and timeline generation.</p>
-          <div class="proj-chips"><span class="chip">NLP</span><span class="chip">AI Pipeline</span><span class="chip">Python</span></div>
+          <h3 class="proj-name">Personalised Fitness & Diet Recommender</h3>
+          <p class="proj-desc">Multi-model recommendation engine fusing 4 PCA embeddings for personalised meal plans, workout types, and macro targets. Layered a Gaussian HMM on Fitbit time-series to classify users into 4 health states, plus a PPO RL agent on a custom Gymnasium environment with a 150-action space.</p>
+          <div class="proj-chips"><span class="chip">PPO / RL</span><span class="chip">Gaussian HMM</span><span class="chip">Scikit-learn</span><span class="chip">Pandas</span></div>
         </div>
       </a>
 
-      <a href="https://github.com/omamah123" target="_blank" class="proj-row reveal rd2">
+      <a href="https://github.com/omamah123/lab-monitoring-system" target="_blank" class="proj-row reveal rd2">
         <span class="proj-idx">03</span>
         <div>
-          <h3 class="proj-name">Personalized Fitness & Diet Recommender</h3>
-          <p class="proj-desc">ML-powered recommendation system delivering tailored fitness plans and dietary suggestions based on user health data and goals.</p>
-          <div class="proj-chips"><span class="chip">Machine Learning</span><span class="chip">Recommender</span><span class="chip">Pandas</span></div>
+          <h3 class="proj-name">Lab Monitoring System</h3>
+          <p class="proj-desc">Real-time multi-class object detection and behaviour-tracking on live video feeds using YOLOv8, achieving sub-150ms end-to-end inference latency per frame. Engineered an event-driven alert pipeline that triggers on detected anomalies, reducing reliance on manual monitoring to near-zero in test scenarios.</p>
+          <div class="proj-chips"><span class="chip">YOLOv8</span><span class="chip">Computer Vision</span><span class="chip">Python</span><span class="chip">OpenCV</span></div>
         </div>
       </a>
 
-      <a href="https://github.com/omamah123" target="_blank" class="proj-row reveal">
+      <a href="https://github.com/omamah123/ai-image-generator" target="_blank" class="proj-row reveal">
         <span class="proj-idx">04</span>
         <div>
-          <h3 class="proj-name">PVFC Web Application</h3>
-          <p class="proj-desc">Production-deployed full-stack web app built with ASP.NET and SQL Server, with dynamic data management and live hosting.</p>
-          <div class="proj-chips"><span class="chip">ASP.NET</span><span class="chip">SQL Server</span><span class="chip">Full-Stack</span></div>
+          <h3 class="proj-name">AI Image Generator</h3>
+          <p class="proj-desc">Deployed Stable Diffusion XL with GPU memory optimisations (VAE tiling, attention slicing, CPU offload) — cutting VRAM usage by ~40% with no visible quality loss. Built a custom UI with 8 style presets, negative prompting, and adjustable parameters for non-technical users.</p>
+          <div class="proj-chips"><span class="chip">Stable Diffusion XL</span><span class="chip">PyTorch</span><span class="chip">Generative AI</span></div>
         </div>
       </a>
 
-      <a href="https://github.com/omamah123" target="_blank" class="proj-row reveal rd1">
+      <a href="https://github.com/omamah123/eliza-customer-service-chatbot" target="_blank" class="proj-row reveal rd1">
         <span class="proj-idx">05</span>
         <div>
-          <h3 class="proj-name">Eliza Chatbot</h3>
-          <p class="proj-desc">Rule-based NLP conversational agent implementing pattern matching, reflection, and context-aware dialogue — inspired by the classic ELIZA program.</p>
+          <h3 class="proj-name">Eliza Customer Service Chatbot</h3>
+          <p class="proj-desc">Rule-based ELIZA-style customer service chatbot for ShopEase. Implements Python's <code style="font-size:0.8rem;color:var(--muted);background:var(--border);padding:0.1rem 0.3rem;border-radius:3px">re</code> module with pronoun reflection, keyword spotting, and context-aware dialogue patterns for natural customer interactions.</p>
           <div class="proj-chips"><span class="chip">NLP</span><span class="chip">Rule-based AI</span><span class="chip">Python</span></div>
         </div>
       </a>
 
-      <a href="https://github.com/omamah123" target="_blank" class="proj-row reveal rd2">
-        <span class="proj-idx">06</span>
-        <div>
-          <h3 class="proj-name">NovelTrack Web App</h3>
-          <p class="proj-desc">Full-stack book tracking application — log, rate, and manage reading lists with a clean interface and persistent storage.</p>
-          <div class="proj-chips"><span class="chip">Full-Stack</span><span class="chip">JavaScript</span><span class="chip">SQL</span></div>
-        </div>
-      </a>
+
 
     </div>
   </div>
 </div>
+
+<hr class="divider">
+
+<!-- EDUCATION -->
+<section id="education">
+  <p class="section-label reveal">Education</p>
+  <div class="reveal rd1">
+    <div class="edu-row">
+      <p class="edu-school">Pakistan Institute of Engineering and Applied Sciences (PIEAS)</p>
+      <p class="edu-degree">B.S. Computer Science &nbsp;·&nbsp; Islamabad, Pakistan</p>
+      <p class="edu-meta">Aug 2023 – May 2027 (Expected)</p>
+      <p class="edu-courses"><span>Relevant coursework:</span> Database Systems · Computer Vision · Introduction to Artificial Intelligence · Fundamentals of Natural Language Processing · Computational Intelligence</p>
+    </div>
+  </div>
+</section>
 
 <hr class="divider">
 
@@ -382,23 +459,38 @@
   <div class="cert-list reveal rd1">
     <div class="cert-row">
       <span class="cert-name">Data Manipulation with Pandas</span>
-      <span class="cert-org">DataCamp</span>
+      <div style="display:flex;gap:1rem;align-items:center">
+        <span class="cert-year">2024</span>
+        <span class="cert-org">DataCamp</span>
+      </div>
     </div>
     <div class="cert-row">
       <span class="cert-name">Understanding Machine Learning</span>
-      <span class="cert-org">DataCamp</span>
+      <div style="display:flex;gap:1rem;align-items:center">
+        <span class="cert-year">2024</span>
+        <span class="cert-org">DataCamp</span>
+      </div>
     </div>
     <div class="cert-row">
       <span class="cert-name">Intermediate SQL</span>
-      <span class="cert-org">DataCamp</span>
+      <div style="display:flex;gap:1rem;align-items:center">
+        <span class="cert-year">2024</span>
+        <span class="cert-org">DataCamp</span>
+      </div>
     </div>
     <div class="cert-row">
       <span class="cert-name">Joining Data in SQL</span>
-      <span class="cert-org">DataCamp</span>
+      <div style="display:flex;gap:1rem;align-items:center">
+        <span class="cert-year">2024</span>
+        <span class="cert-org">DataCamp</span>
+      </div>
     </div>
     <div class="cert-row">
       <span class="cert-name">Intermediate Python</span>
-      <span class="cert-org">DataCamp</span>
+      <div style="display:flex;gap:1rem;align-items:center">
+        <span class="cert-year">2024</span>
+        <span class="cert-org">DataCamp</span>
+      </div>
     </div>
   </div>
 </section>
@@ -423,13 +515,11 @@
 </footer>
 
 <script>
-  // Nav scroll + hamburger
   const hb = document.getElementById('hb');
   const nl = document.getElementById('nl');
   hb.addEventListener('click', () => nl.classList.toggle('open'));
   nl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nl.classList.remove('open')));
 
-  // Reveal on scroll
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
   }, { threshold: 0.1 });
